@@ -67,7 +67,7 @@ public class Game {
 	public static void main(String[] args) {
 		
 		// if the title does not show up, just resize the window and it will show up.
-		// no idea why it happens and why it could be solved by resizing the window.
+		// I have no idea why it happens and why it could be solved by resizing the window.
 		
 		new Game();
 	}
