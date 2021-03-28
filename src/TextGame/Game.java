@@ -23,8 +23,6 @@ public class Game {
 	Font normalFont = new Font("Times New Roman", Font.PLAIN, 30);
 	JTextArea mainTextArea;
 	
-	TitleScreenHandler tsHandler = new TitleScreenHandler();
-	
 	public Game() {
 		
 		/*****************************************************
@@ -65,78 +63,12 @@ public class Game {
 		startButton.setBackground(Color.black);
 		startButton.setForeground(Color.white);
 		startButton.setFont(normalFont);
-		// Add EventListener to Button
-		startButton.addActionListener(tsHandler);
 		
 		// add button and panel to game board
 		startButtonPanel.add(startButton);
 		con.add(startButtonPanel);
 		
-	} 
-	
-	public void createGameScreen() {
 		
-		//This screen will show up once we start the game.
-		//The title and startButton will disappear.
-		gameWindow.getContentPane().setBackground(Color.gray);
-		titleNamePanel.setVisible(false);
-		startButtonPanel.setVisible(false);
-		
-		//Set main Text Panel
-		mainTextPanel = new JPanel();
-		mainTextPanel.setBounds(100, 100, 600, 250);
-		mainTextPanel.setBackground(Color.gray);
-		con.add(mainTextPanel);
-		
-		//Set main Text Area, black
-		mainTextArea = new JTextArea("Main Text Area.");
-		mainTextArea.setBounds(100, 100, 600, 250);
-		mainTextArea.setBackground(Color.DARK_GRAY);
-		mainTextArea.setForeground(Color.white);
-		mainTextArea.setFont(normalFont);
-		mainTextArea.setLineWrap(true);
-		mainTextPanel.add(mainTextArea);
-		
-		//Add panel for option buttons
-		optionButtonPanel = new JPanel();
-		optionButtonPanel.setBounds(100, 350, 600, 150);
-		optionButtonPanel.setBackground(Color.DARK_GRAY);
-		//Set Buttons Layout
-		optionButtonPanel.setLayout(new GridLayout(4, 1));
-		con.add(optionButtonPanel);
-		
-		//Add Option Buttons
-		option1 = new JButton("Option 1");
-		option1.setBackground(Color.black);
-		option1.setForeground(Color.white);
-		option1.setFont(normalFont);
-		optionButtonPanel.add(option1);
-		option2 = new JButton("Option 2");
-		option2.setBackground(Color.black);
-		option2.setForeground(Color.white);
-		option2.setFont(normalFont);
-		optionButtonPanel.add(option2);
-		option3 = new JButton("Option 3");
-		option3.setBackground(Color.black);
-		option3.setForeground(Color.white);
-		option3.setFont(normalFont);
-		optionButtonPanel.add(option3);
-		option4 = new JButton("Option 4");
-		option4.setBackground(Color.black);
-		option4.setForeground(Color.white);
-		option4.setFont(normalFont);
-		optionButtonPanel.add(option4);
-		
-		
-	}
-	
-	// Title Screen Handler
-	public class TitleScreenHandler implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent event) {
-			// TODO Auto-generated method stub
-			createGameScreen();
-		}	
 	}
 	
 	public static void main(String[] args) {
@@ -144,7 +76,12 @@ public class Game {
 		// if the title does not show up, just resize the window and it will show up.
 		// I have no idea why it happens and why it could be solved by resizing the window.
 		
-		new Game();
+		Game ourGame = new Game();
+		
+		// Add EventListener to Button
+		TitleScreenHandler tsHandler = new TitleScreenHandler(ourGame);
+		ourGame.startButton.addActionListener(tsHandler);
+		
 	}
  
 }
