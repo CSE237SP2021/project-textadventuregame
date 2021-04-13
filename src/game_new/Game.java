@@ -15,26 +15,68 @@ import game_new.extendClass.VisibilityManager;
 
 public class Game {
 	
-	ChoiceHandler cHandler = new ChoiceHandler(this);
-	UI ui = new UI();
-	public VisibilityManager vm = new VisibilityManager(ui);
-	public Story story = new Story(this, ui, vm);
+	private ChoiceHandler cHandler;
+	private UI ui;
+	private VisibilityManager vm;
+	private Story story;
 	
-	public String nextPosition1;
-	public String nextPosition2;
-	public String nextPosition3;
-	public String nextPosition4;
+	private String nextPosition1;
+	private String nextPosition2;
+	private String nextPosition3;
+	private String nextPosition4;
 	
 	public static void main(String[] args) {
-		new Game();
+		Game game = new Game();
+		game.execute();
 	}
 	
 	public Game() {
-		ui.createUI(cHandler);
-		story.defaultSetup();
-		vm.showTitleScreen();
+		
+		ui = new UI();
+		vm = new VisibilityManager(ui);
+		story = new Story(this, ui, vm);
+		cHandler = new ChoiceHandler(this, vm, story);
 	}
 	
+	public void execute() {
+		//make all UI part
+		ui.createUI(cHandler);
+		story.defaultSetup();
+		//only show title first. So we start with start button in the user interface
+		vm.showTitleScreen();
+	}
+
+	public String getNextPosition1() {
+		return nextPosition1;
+	}
+
+	public void setNextPosition1(String nextPosition1) {
+		this.nextPosition1 = nextPosition1;
+	}
+
+	public String getNextPosition2() {
+		return nextPosition2;
+	}
+
+	public void setNextPosition2(String nextPosition2) {
+		this.nextPosition2 = nextPosition2;
+	}
+
+	public String getNextPosition3() {
+		return nextPosition3;
+	}
+
+	public void setNextPosition3(String nextPosition3) {
+		this.nextPosition3 = nextPosition3;
+	}
+
+	public String getNextPosition4() {
+		return nextPosition4;
+	}
+
+	public void setNextPosition4(String nextPosition4) {
+		this.nextPosition4 = nextPosition4;
+	}
 }
 
 
