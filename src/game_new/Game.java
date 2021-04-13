@@ -41,7 +41,12 @@ public class Game {
 	public void execute() {
 		//make all UI part
 		ui.createUI(cHandler);
-		story.defaultSetup();
+//		if(ui.startButton1.isSelected()) {
+//			story.easySetup();
+//		}
+//		if(ui.startButton2.isSelected) {
+//			story.hardSetup();
+//		}
 		//only show title first. So we start with start button in the user interface
 		vm.showTitleScreen();
 	}

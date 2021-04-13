@@ -25,9 +25,15 @@ public class ChoiceHandler implements ActionListener{
 		String yourChoice = event.getActionCommand();
   
 		switch(yourChoice){
-			case "start": 
+			case "start1": 
+				story.Setup(50, "Bowie", 5);
 				vm.titleToTown();
-				story.townGate();
+				story.mysteryGate();
+				break;
+			case "start2": 
+				story.Setup(15,"toyKnife", 1);
+				vm.titleToTown();
+				story.mysteryGate();
 				break;
 			case "c1": 
 				story.selectPosition(game.getNextPosition1());

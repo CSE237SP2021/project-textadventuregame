@@ -19,7 +19,7 @@ public class Player extends Role{
 		return instance;
 	}
 	
-	public void battel(Monster enemy) {
+	public void battel(Role enemy) {
 		enemy.setHitPoint(enemy.getHitPoint() - this.getAttack() + enemy.getDefense());
 		this.setHitPoint(this.getHitPoint() - enemy.getAttack() + this.getDefense());
 	}
