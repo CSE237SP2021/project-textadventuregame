@@ -28,9 +28,11 @@ public class UI {
 	JPanel imageP = new JPanel();
 	JLabel titleNameLabel = new JLabel("ADVENTURE"),
 		   hpLabel = new JLabel("HP:"), hpLabelNumber = new JLabel(),
+		   moneyLabel = new JLabel("Gold: "), moneyLabelNumber = new JLabel(),
 		   weaponLabel = new JLabel("Weapon:"), weaponLabelName = new JLabel(),
 		   imageLabel;
-	JButton startButton = new JButton("Let's go!"),
+	JButton startButton1 = new JButton("Let's go(easy mode)"),
+			startButton2 = new JButton("try it!(hard mode)"),
 			choice1 = new JButton(), choice2 = new JButton(),
 			choice3 = new JButton(), choice4 = new JButton();
 	JTextArea mainTextArea = new JTextArea("This is the main text are.");
@@ -44,8 +46,9 @@ public class UI {
 		//set up titlePanel
 		setupPanel(titleP, new int[] {100, 100, 600, 150});
 		setupLabel(titleNameLabel, big, titleP);
-		setupPanel(startBtnP, new int[] {300, 400, 200, 100});
-		setupButton(startButton, cHandler, "start", startBtnP);		
+		setupPanel(startBtnP, new int[] {100, 350, 600, 200});
+		setupButton(startButton1, cHandler, "start1", startBtnP);		
+		setupButton(startButton2, cHandler, "start2", startBtnP);
 		
 		//set up mainPanel
 		setupPanel(mainP, new int[] {100, 100, 600, 250});
@@ -63,8 +66,8 @@ public class UI {
 		//set up playerPanel
 		setupPanel(playerP, new int[] {100, 15, 600, 50});
 		playerP.setLayout(new GridLayout(1, 4));
-		JLabel[] ppLabel = {hpLabel, hpLabelNumber, weaponLabel, weaponLabelName};
-		for(int i = 0; i < 4; i++) {
+		JLabel[] ppLabel = {hpLabel, hpLabelNumber, moneyLabel, moneyLabelNumber ,weaponLabel, weaponLabelName};
+		for(int i = 0; i < 6; i++) {
 			setupLabel(ppLabel[i], small, playerP);
 		}
 		weaponLabel.setBackground(Color.red);

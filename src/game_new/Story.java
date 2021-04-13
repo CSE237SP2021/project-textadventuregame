@@ -1,8 +1,9 @@
 package game_new;
 
+import game_new.character.Guard;
 import game_new.character.Monster;
 import game_new.character.Player;
-
+import game_new.character.Role;
 import game_new.extendClass.VisibilityManager;
 import game_new.weapon.Weapon_Knife;
 
@@ -13,7 +14,6 @@ public class Story {
 	private VisibilityManager vm;
 	private Player player;
 	private Monster monster;
-	private int silverRing;
 	
 	public Story(Game g, UI userInterface, VisibilityManager vManager) {
 		
@@ -23,28 +23,36 @@ public class Story {
 		
 	}
 	
-	public void defaultSetup() {
+	public void Setup(int health, String WeaponName, int weaponDamage) {
 		
 		player = Player.getInstance();
-	 	player.setHitPoint(10);
+	 	player.setHitPoint(health);
+	 	player.setAttack(10);
+	 	player.setDefense(2);
+	 	player.setGold(0);
 		ui.hpLabelNumber.setText("" + player.getHitPoint());
-		
-		player.setCurrentWeapon(new Weapon_Knife("Bowie", 5));
+		ui.moneyLabelNumber.setText("" + player.getGold());
+		player.setCurrentWeapon(new Weapon_Knife(WeaponName, weaponDamage));
 		ui.weaponLabelName.setText(player.getCurrentWeapon().getName());
-		silverRing = 0;
-		//System.out.println("asd;lkf");
-		
 	}
 	
+	public void interaction(Role role) {
+		player.battel(role);
+		ui.hpLabelNumber.setText("" + player.getHitPoint());
+		ui.weaponLabelName.setText(player.getCurrentWeapon().getName());
+	}
+	
+
 	public void selectPosition(String nextPosition) {
 		switch(nextPosition) {
-			case "townGate": 
-				townGate(); 
+			case "mysteryGate": 
+				mysteryGate(); 
 				break;
-			case "talkGuard":
-				talkGuard(); 
+			case "talkToGuard":
+				talkToGuard(); 
 				break;
-			case "attackGuard": 
+			case "attackGuardOnce": 
+				attackGaurdOnce();
 				break;
 			case "crossRoad": 
 				break;
@@ -57,21 +65,22 @@ public class Story {
 		}
 	}
 	
-	public void townGate() {
-		ui.mainTextArea.setText("You are at the gate of the Town. You see a guard.");
+	public void mysteryGate() {
+		ui.mainTextArea.setText("You are at the gate of the mystery maze. You see a guard."
+				+ "  Even though it is cute, you have to be careful!");
 		ui.choice1.setText("talk to guard");
 		ui.choice2.setText("Attack the guard");
 		ui.choice3.setText("Leave");
 		ui.choice4.setText("");
 		
-		game.setNextPosition1("talkGuard");
-		game.setNextPosition2("attackGuard");
+		game.setNextPosition1("talkToGuard");
+		game.setNextPosition2("attackGuardOnce");
 		game.setNextPosition3("crossRoad");
-		game.setNextPosition4("");		
+		game.setNextPosition4("attackGuard");		
 	}
 	
-	public void talkGuard() {
-		if (silverRing == 0) {
+	public void talkToGuard() {
+		if (player.getGold() == 0) {
 			ui.mainTextArea.setText("to be done");
 			ui.choice1.setText("");
 			ui.choice2.setText("");
@@ -85,5 +94,30 @@ public class Story {
 		}
 	}
 	
+	public void attackGaurdOnce() {
+		Guard guard = new Guard("Peppa", 10, 10, 0);
+		guard.setGold(1);
+		interaction(guard);
+		if(guard.getHitPoint() < 0) {
+			player.setGold(guard.getGold());
+			ui.moneyLabelNumber.setText("" + player.getGold());
+			ui.mainTextArea.setText("The guard is dead");
+			ui.choice1.setText("crossRoad");
+			ui.choice2.setText("");
+			ui.choice3.setText("");
+			ui.choice4.setText("");
+			
+			game.setNextPosition1("");
+			game.setNextPosition2("loot");
+			game.setNextPosition3("");
+			game.setNextPosition4("");
+		}else {
+			ui.mainTextArea.setText("The guard is still alive");
+			ui.choice1.setText("give him candy");
+			ui.choice2.setText("run");
+			ui.choice3.setText("continue attack");
+			ui.choice4.setText("");
+		}
+	}
 	
 }

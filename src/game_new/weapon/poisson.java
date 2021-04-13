@@ -1,5 +1,6 @@
 package game_new.weapon;
 
+import game_new.character.Guard;
 import game_new.character.Monster;
 import game_new.character.Player;
 
@@ -15,6 +16,12 @@ public class poisson implements Tool {
 	public void visit(Monster monster) {
 		// TODO Auto-generated method stub
 		monster.setHitPoint(monster.getHitPoint() - 100);	
+	}
+
+	@Override
+	public void visit(Guard guard) {
+		// TODO Auto-generated method stub
+		guard.setHitPoint(guard.getHitPoint() + 10);	
 	}
 	
 	
