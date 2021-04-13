@@ -1,17 +1,19 @@
 package game_new;
 
+import game_new.character.Monster;
+import game_new.character.Player;
+
 import game_new.extendClass.VisibilityManager;
-import game_new.monster.SuperMonster;
 import game_new.weapon.Weapon_Knife;
 
 public class Story {
 
-	Game game;
-	UI ui;
-	VisibilityManager vm;
-	Player player = new Player();
-	SuperMonster monster;
-	int silverRing;
+	private Game game;
+	private UI ui;
+	private VisibilityManager vm;
+	private Player player;
+	private Monster monster;
+	private int silverRing;
 	
 	public Story(Game g, UI userInterface, VisibilityManager vManager) {
 		
@@ -23,26 +25,35 @@ public class Story {
 	
 	public void defaultSetup() {
 		
-	 	player.hp = 10;
-		ui.hpLabelNumber.setText("" + player.hp);
+		player = Player.getInstance();
+	 	player.setHitPoint(10);
+		ui.hpLabelNumber.setText("" + player.getHitPoint());
 		
-		player.currentWeapon = new Weapon_Knife();
-		ui.weaponLabelName.setText(player.currentWeapon.name);
+		player.setCurrentWeapon(new Weapon_Knife("Bowie", 5));
+		ui.weaponLabelName.setText(player.getCurrentWeapon().getName());
 		silverRing = 0;
-		System.out.println("asd;lkf");
+		//System.out.println("asd;lkf");
 		
 	}
 	
 	public void selectPosition(String nextPosition) {
 		switch(nextPosition) {
-		case "townGate": townGate(); break;
-		case "talkGuard": talkGuard(); break;
-		case "attackGuard": break;
-		case "crossRoad": break;
-		case "monsterAttack": break;
-		case "win": break;
-		case "lose": break;
-		
+			case "townGate": 
+				townGate(); 
+				break;
+			case "talkGuard":
+				talkGuard(); 
+				break;
+			case "attackGuard": 
+				break;
+			case "crossRoad": 
+				break;
+			case "monsterAttack":
+				break;
+			case "win": 
+				break;
+			case "lose": 
+				break;
 		}
 	}
 	
@@ -53,10 +64,10 @@ public class Story {
 		ui.choice3.setText("Leave");
 		ui.choice4.setText("");
 		
-		game.nextPosition1 = "talkGuard";
-		game.nextPosition2 = "attackGuard";
-		game.nextPosition3 = "crossRoad";
-		game.nextPosition4 = "";		
+		game.setNextPosition1("talkGuard");
+		game.setNextPosition2("attackGuard");
+		game.setNextPosition3("crossRoad");
+		game.setNextPosition4("");		
 	}
 	
 	public void talkGuard() {
@@ -67,10 +78,10 @@ public class Story {
 			ui.choice3.setText("");
 			ui.choice4.setText("");
 			
-			game.nextPosition1 = "";
-			game.nextPosition2 = "";
-			game.nextPosition3 = "";
-			game.nextPosition4 = "";	
+			game.setNextPosition1("");
+			game.setNextPosition2("");
+			game.setNextPosition3("");
+			game.setNextPosition4("");	
 		}
 	}
 	

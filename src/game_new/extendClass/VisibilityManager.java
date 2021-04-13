@@ -3,10 +3,10 @@ package game_new.extendClass;
 import game_new.UI;
 
 public class VisibilityManager {
-	UI ui;
+	
+	private UI ui;
 	
 	public VisibilityManager(UI userInterface) {
-		
 		ui = userInterface;
 	}
 	
