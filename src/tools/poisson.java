@@ -1,8 +1,8 @@
-package game_new.weapon;
+package tools;
 
-import game_new.character.Guard;
-import game_new.character.Monster;
-import game_new.character.Player;
+import character.Guard;
+import character.Monster;
+import character.Player;
 
 public class poisson implements Tool {
 

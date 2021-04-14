@@ -1,4 +1,4 @@
-package game_new.character;
+package character;
 
 public class Monster_Goblin extends Monster{
 

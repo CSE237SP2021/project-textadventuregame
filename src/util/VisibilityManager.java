@@ -1,6 +1,6 @@
-package game_new.extendClass;
+package util;
 
-import game_new.UI;
+import game.UI;
 
 public class VisibilityManager {
 	

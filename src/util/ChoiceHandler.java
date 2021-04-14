@@ -1,11 +1,11 @@
-package game_new.extendClass;
+package util;
 
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import game_new.Game;
-import game_new.Story;
+import game.Game;
+import game.Story;
 
 
 public class ChoiceHandler implements ActionListener{

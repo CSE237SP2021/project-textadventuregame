@@ -1,4 +1,4 @@
-package game_new;
+package game;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -10,8 +10,8 @@ import javax.swing.JPanel;
 import java.awt.Font;
 import javax.swing.JTextArea;
 
-import game_new.extendClass.ChoiceHandler;
-import game_new.extendClass.VisibilityManager;
+import util.ChoiceHandler;
+import util.VisibilityManager;
 
 public class Game {
 	
@@ -39,6 +39,7 @@ public class Game {
 	}
 	
 	public void execute() {
+		System.setProperty("java.awt.headless", "true"); //Disables headless
 		//make all UI part
 		ui.createUI(cHandler);
 //		if(ui.startButton1.isSelected()) {
