@@ -20,3 +20,5 @@ Everything should work now. However, since we are doing a lot GUI stuff in UI pa
 
 ## What commands are needed to compile and run your code from the command line (or better yet, provide a script that people can use to run your program!)
 
+we add a run.sh in the development branch. So just run ./run.sh
+However, if linux system doesn't initiate x server, it might fail due to the usage of GUI
