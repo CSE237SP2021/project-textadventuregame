@@ -1,11 +1,11 @@
-package game_new;
+package game;
 
-import game_new.character.Guard;
-import game_new.character.Monster;
-import game_new.character.Player;
-import game_new.character.Role;
-import game_new.extendClass.VisibilityManager;
-import game_new.weapon.Weapon_Knife;
+import character.Guard;
+import character.Monster;
+import character.Player;
+import character.Role;
+import tools.Weapon_Knife;
+import util.VisibilityManager;
 
 public class Story {
 

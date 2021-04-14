@@ -1,4 +1,4 @@
-package game_new;
+package game;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
-import game_new.extendClass.ChoiceHandler;
+import util.ChoiceHandler;
 
 //import ChoiceHandler;
 

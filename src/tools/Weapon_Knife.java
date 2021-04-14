@@ -1,4 +1,4 @@
-package game_new.weapon;
+package tools;
 
 public class Weapon_Knife extends Weapon{
 	

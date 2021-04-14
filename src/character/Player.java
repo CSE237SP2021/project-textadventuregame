@@ -1,7 +1,7 @@
-package game_new.character;
+package character;
 
-import game_new.weapon.Tool;
-import game_new.weapon.Weapon;
+import tools.Tool;
+import tools.Weapon;
 
 public class Player extends Role{
 	

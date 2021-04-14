@@ -1,6 +1,6 @@
-package game_new.character;
+package character;
 
-import game_new.weapon.Tool;
+import tools.Tool;
 
 public class Guard extends Role{
 	

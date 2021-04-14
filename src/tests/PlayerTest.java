@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import game_new.character.Monster;
-import game_new.character.Player;
+import character.Monster;
+import character.Player;
 
 class PlayerTest {
 
