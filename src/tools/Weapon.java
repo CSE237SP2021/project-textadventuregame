@@ -1,6 +1,10 @@
 package tools;
 
-public class Weapon {
+import character.Guard;
+import character.Monster;
+import character.Player;
+
+public class Weapon implements Tool {
 	
 	private String name;
 	private int damage;
@@ -9,6 +13,8 @@ public class Weapon {
 		this.setName(name);
 		this.damage = damage;
 	}
+	
+	Weapon(){}
 
 	public int getDamage() {
 		return damage;
@@ -24,5 +30,23 @@ public class Weapon {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public void visit(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Monster monster) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Guard guard) {
+		// TODO Auto-generated method stub
+		
 	}
 }

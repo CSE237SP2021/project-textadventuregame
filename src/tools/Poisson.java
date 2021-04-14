@@ -4,7 +4,7 @@ import character.Guard;
 import character.Monster;
 import character.Player;
 
-public class poisson implements Tool {
+public class Poisson implements Tool {
 
 	@Override
 	public void visit(Player p) {
