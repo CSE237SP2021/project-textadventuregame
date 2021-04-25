@@ -82,7 +82,7 @@ public class Story {
 	public void talkToGuard() {
 		if (player.getGold() == 0) {
 			ui.mainTextArea.setText("to be done");
-			ui.choice1.setText("");
+			ui.choice1.setText(";lkjl;j;lkj");
 			ui.choice2.setText("");
 			ui.choice3.setText("");
 			ui.choice4.setText("");
