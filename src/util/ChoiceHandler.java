@@ -26,12 +26,12 @@ public class ChoiceHandler implements ActionListener{
   
 		switch(yourChoice){
 			case "start1": 
-				story.Setup(50, "Bowie", 5);
+				story.Setup(100, "Bowie", 5);
 				vm.titleToTown();
 				story.mysteryGate();
 				break;
 			case "start2": 
-				story.Setup(15,"toyKnife", 1);
+				story.Setup(50,"Bowie", 5);
 				vm.titleToTown();
 				story.mysteryGate();
 				break;

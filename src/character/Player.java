@@ -20,7 +20,9 @@ public class Player extends Role{
 	}
 	
 	public void battel(Role enemy) {
+		System.out.println("begin battle");
 		enemy.setHitPoint(enemy.getHitPoint() - this.getAttack() + enemy.getDefense());
+		System.out.println(enemy.getHitPoint());
 		this.setHitPoint(this.getHitPoint() - enemy.getAttack() + this.getDefense());
 	}
 	
