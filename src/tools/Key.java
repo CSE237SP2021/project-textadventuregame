@@ -18,7 +18,7 @@ public class Key implements Tool{
 
 	@Override
 	public void visit(Guard guard) {
-
+		guard.setGold(guard.getGold() + value);
 	}
 
 	@Override
