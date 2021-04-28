@@ -1,5 +1,7 @@
 package character;
 
+import java.util.ArrayList;
+
 import tools.Tool;
 import tools.Weapon;
 
@@ -9,6 +11,7 @@ public class Player extends Role{
 	private static Player instance;
 	private String name;
 	private Weapon currentWeapon = null;
+	private ArrayList<Tool> backpack = new ArrayList<Tool>();
 	
 	private Player() {}
 
@@ -53,5 +56,13 @@ public class Player extends Role{
 
 	public void setCurrentWeapon(Weapon currentWeapon) {
 		this.currentWeapon = currentWeapon;
+	}
+
+	public ArrayList<Tool> getBackpack() {
+		return backpack;
+	}
+
+	public void setBackpack(ArrayList<Tool> backpack) {
+		this.backpack = backpack;
 	}	
 }
