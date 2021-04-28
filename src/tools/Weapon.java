@@ -8,6 +8,7 @@ public class Weapon implements Tool {
 	
 	private String name;
 	private int damage;
+	private int value = 5;
 
 	Weapon(String name, int damage){
 		this.setName(name);
@@ -48,5 +49,10 @@ public class Weapon implements Tool {
 	public void visit(Guard guard) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public int getValue() {
+		return value;
 	}
 }

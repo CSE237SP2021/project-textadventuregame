@@ -6,6 +6,8 @@ import character.Player;
 
 public class Poisson implements Tool {
 
+	private int value = 20;
+	
 	@Override
 	public void visit(Player p) {
 		// TODO Auto-generated method stub
@@ -22,6 +24,11 @@ public class Poisson implements Tool {
 	public void visit(Guard guard) {
 		// TODO Auto-generated method stub
 		guard.setHitPoint(guard.getHitPoint() + 10);	
+	}
+
+	@Override
+	public int getValue() {
+		return value;
 	}
 	
 	

@@ -1,10 +1,14 @@
 package game;
 
+import java.util.ArrayList;
+
 import character.Guard;
 import character.Monster;
 import character.Monster_Djinn;
 import character.Player;
 import character.Role;
+import tools.Store;
+import tools.Tool;
 import tools.Weapon_Knife;
 import util.VisibilityManager;
 
@@ -16,6 +20,7 @@ public class Story {
 	private Player player;
 	private Guard guard;
 	private Monster_Djinn djinn;
+	private Monster boss;
 	
 	public Story(Game g, UI userInterface, VisibilityManager vManager) {
 		
@@ -28,6 +33,7 @@ public class Story {
 	public void Setup(int health, String WeaponName, int weaponDamage) {
 		
 		player = Player.getInstance();
+		
 	 	player.setHitPoint(health);
 	 	player.setAttack(10);
 	 	player.setDefense(2);
@@ -42,6 +48,8 @@ public class Story {
 		
 		djinn = new Monster_Djinn("Kela", 45, 15, 5);
 		djinn.setGold(25);
+		
+		boss = new Monster("bee", 100, 30, 25);
 	}
 	
 	public void setOptions(String option1, String option2, String option3, String option4) {
@@ -115,11 +123,50 @@ public class Story {
 			case "rowAcrossRiver":
 				rowAcrossRiver();
 				break;
+			case "store":
+				store();
+				break;
+			case "buy":
+				buy();
+				break;
+			case "sell":
+				sell();
+				break;
+			case "buy1":
+				buy1();
+				break;
+			case "buy2":
+				buy2();
+				break;
+			case "buy3":
+				buy3();
+				break;
+			case "sell1":
+				sell1();
+				break;
+			case "sell2":
+				sell2();
+				break;
+			case "meetBoss":
+				meetBoss();
+				break;
+			case "fightBoss":
+				fightBoss();
+				break;
+			case "poissonBoss":
+				poissonBoss();
+				break;
+			case "eatPill":
+				eatPill();
+				break;
+			case "vault":
+				vault();
+				break;
 			case "exit":
 				System.exit(0);
 		}
 	}
-	
+
 	public void mysteryGate() {
 		ui.mainTextArea.setText("You are at the gate of the mystery maze. You see a guard."
 				+ "  Even though it is cute, you have to be careful!");
@@ -257,7 +304,7 @@ public class Story {
 	public void rowAcrossRiver() {
 		ui.mainTextArea.setText("The water is turbid, and you are new to boating. Nevertheless, you make it across the river.");		
 		setOptions("Sell the boat.", "Hide the boat and proceed.", "", "");
-		setNextSteps("sellBoat", "theEnd", "", "");
+		setNextSteps("sellBoat", "store", "", "");
 	}
 	
 	public void sellBoat() {
@@ -265,9 +312,170 @@ public class Story {
 		ui.moneyLabelNumber.setText("" + player.getGold());
 		ui.mainTextArea.setText("You earn 10 gold from selling the boat!");
 		setOptions("Proceed.", "", "", "");
-		setNextSteps("theEnd", "", "", "");
+		setNextSteps("store", "", "", "");
 	}
 
+	public void store() {
+		ui.mainTextArea.setText("There is a magic store in front of you, you might buy some useful tools to help you. Or you can sell something in your backpack");
+		setOptions("buy! buy! buy!", "sell some items", "leave", "");
+		setNextSteps("buy", "sell", "meetBoss", "");
+	}
+	
+	public void buy() {
+		ui.mainTextArea.setText("Please choose the item you would like to buy.");
+		setOptions("PILL", "POISSON", "KEY", "back");
+		setNextSteps("buy1", "buy2", "buy3", "store");	
+	}
+	
+	public void buy1() {
+		Tool tool = Store.getTool(ui.choice1.getText());
+		buyHelper(tool);
+	}
+	
+	public void buy2() {
+		Tool tool = Store.getTool(ui.choice2.getText());
+		buyHelper(tool);
+	}
+	
+	public void buy3() {
+		Tool tool = Store.getTool(ui.choice3.getText());
+		buyHelper(tool);
+	}
+	
+	private void buyHelper(Tool tool) {
+		if(player.getGold() >= tool.getValue()) {
+			ArrayList<Tool> backp = player.getBackpack();
+			backp.add(tool);
+			player.setGold(player.getGold() - tool.getValue());
+			ui.moneyLabelNumber.setText("" + player.getGold());
+			ui.mainTextArea.setText("Greate deal! Would you like buy more?");	
+		}else {
+			ui.mainTextArea.setText("You don't have enough money, you may go back and sell something first");	
+		}
+		setOptions("PILL", "POISSON", "KEY", "back");
+		setNextSteps("buy1", "buy2", "buy3", "store");
+	}
+	
+	@SuppressWarnings("unused")
+	public void sell() {
+		ui.mainTextArea.setText("Please choose the item you would like to sell.");
+		int itemSize = player.getBackpack().size();
+		if(itemSize != 0) {
+			Tool tool1 = player.getBackpack().get((int) (Math.random() * itemSize));
+			String item1 = tool1.getClass().getName();
+			Tool tool2 = player.getBackpack().get((int) (Math.random() * itemSize));
+			String item2 = tool2.getClass().getName();
+			//System.out.println(Math.random() * itemSize);
+			if(tool1 != null && tool2 != null) {
+				setOptions(item1, item2, "refresh your backpack", "back");
+				setNextSteps("sell1", "sell2", "sell", "store");
+			}else{
+				if(tool1 == null) {
+					setOptions(item2, item2, "refresh your backpack", "back");
+					setNextSteps("sell1", "sell2", "sell", "store");
+				}
+				if(tool2 == null) {
+					setOptions(item1, item1, "refresh your backpack", "back");
+					setNextSteps("sell1", "sell2", "sell", "store");
+				}
+			}
+		}else {
+			setOptions("Nothing to sell", "Nothing to sell", "refresh your backpack", "back");
+			setNextSteps("", "", "sell", "store");
+		}
+	}
+	
+	public void sell1() {
+		String s = ui.choice1.getText();
+		sellHelper(s);
+	}
+	
+	public void sell2() {
+		String s = ui.choice2.getText();
+		sellHelper(s);
+	}
+	
+	private void sellHelper(String s) {
+		for(Tool t : player.getBackpack()) {
+			if(t.getClass().getName() == s) {
+				player.getBackpack().remove(t);
+				player.setGold(player.getGold() + t.getValue());
+				ui.moneyLabelNumber.setText("" + player.getGold());
+				ui.mainTextArea.setText("Great deal! Would you like sell more?");
+				setOptions("sell more", "", "", "back");
+				setNextSteps("sell", "", "", "store");
+				return;
+			}
+		}
+	}
+	
+	public void meetBoss() {
+		ui.mainTextArea.setText("You find a giant gold vault but a scary boss get in your way. It looks like having high defense and hp. Be wise! Be wise! be wise!");
+		setOptions("Attack the Boss!", "Give him a possion", "take the pill and fight", "back to store");
+		setNextSteps("fightBoss", "poissonBoss", "eatPill", "store");
+	}
+	
+	public void fightBoss() {
+		interaction(boss);
+		fightHelper();
+	}
+	
+	public void poissonBoss() {
+		for(Tool t: player.getBackpack()) {
+			if(t.getClass().getName() == "tools.Poisson") {
+				boss.accept(t);
+				fightHelper();
+				return;
+			}
+		}
+		ui.mainTextArea.setText("you don't have poisson, you may buy one in the store");
+		setOptions("fight the boss anyway", "take a pill and fight", "back to store", "");
+		setNextSteps("fightBoss", "eatPill", "store", "");
+	}
+	
+	public void eatPill() {
+		for(Tool t: player.getBackpack()) {
+			if(t.getClass().getName() == "tools.Pill") {
+				player.accept(t);
+				fightHelper();
+				return;
+			}
+		}
+		ui.mainTextArea.setText("you don't have a pill, you may buy one in the store");
+		setOptions("fight the boss anyway", "use a poisson", "back to store", "");
+		setNextSteps("fightBoss", "poissonBoss", "store", "");
+	}
+	
+	private void fightHelper() {
+		if(player.getHitPoint() <= 0) {
+			ui.mainTextArea.setText("He is so strong, now you find out if you attack he, his hp will be " + boss.getHitPoint() + " but his attack is "+
+		                        boss.getAttack() + " and his defense is "+ boss.getDefense() + " you will be be killed anyway! stop attack and think some strategies");
+			player.setHitPoint(player.getHitPoint() + boss.getAttack() - player.getDefense());
+			ui.hpLabelNumber.setText("" + player.getHitPoint());
+			setOptions("take the pill", "Give him a possion", "back to store", "");
+			setNextSteps("eatPill", "poissonBoss", "store", "");
+		}else{
+			ui.hpLabelNumber.setText("" + player.getHitPoint());
+			if(boss.getHitPoint() <= 0) {
+				ui.mainTextArea.setText("The boss is dead. Now you can go to the vault");
+				
+				setOptions("Go to the splendid gold vault", "", "", "");
+				setNextSteps("vault", "", "", "");
+				
+			}else {
+				ui.mainTextArea.setText("The boss is still alive.");		
+				setOptions("Attack the Boss", "Give hime a possion", "take the pill", "back to store");
+				setNextSteps("fightBoss", "poissonBoss", "eatPill", "store");
+			}
+		}
+	}
+	
+	public void vault() {
+		ui.mainTextArea.setText("wow, there are so much gold in the vault!");
+		setOptions("take all of them and leave", "", "", "");
+		setNextSteps("theEnd", "", "", "");
+	}
+	
 	public void theEnd() {
 		ui.mainTextArea.setText("Congratulations! You have finished Part I of the adventure! The rest of the game will be available very soon! Thank you for your support!");
 		setOptions("", "", "", "");

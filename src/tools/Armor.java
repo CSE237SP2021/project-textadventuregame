@@ -8,6 +8,7 @@ public class Armor implements Tool {
 	
 	private String name;
 	private int defense;
+	private int value = 15;
 	
 	Armor(String name, int defense){
 		this.setName(name);
@@ -34,19 +35,21 @@ public class Armor implements Tool {
 
 	@Override
 	public void visit(Player p) {
-		// TODO Auto-generated method stub
-		
+		p.setDefense(defense);
 	}
 
 	@Override
 	public void visit(Monster monster) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void visit(Guard guard) {
-		// TODO Auto-generated method stub
-		
+
+	}
+
+	@Override
+	public int getValue() {
+		return value;
 	}
 }
