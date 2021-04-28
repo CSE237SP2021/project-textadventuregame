@@ -10,12 +10,12 @@ public class Armor implements Tool {
 	private int defense;
 	private int value = 15;
 	
-	Armor(String name, int defense){
+	public Armor(String name, int defense){
 		this.setName(name);
 		this.setDefense(defense);
 	}
 
-	Armor(){}
+	public Armor(){}
 	
 	public String getName() {
 		return name;
@@ -35,7 +35,7 @@ public class Armor implements Tool {
 
 	@Override
 	public void visit(Player p) {
-		p.setDefense(defense);
+		p.setDefense(p.getDefense() + defense);
 	}
 
 	@Override
