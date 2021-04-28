@@ -1,10 +1,12 @@
-package TextGame;
+package character;
+
+import tools.Tool;
 
 public abstract class Role {
-
 	private int hitPoint;
 	private int attack;
 	private int defense;
+	private int gold;
 	
 	public Role() {}
 	
@@ -38,5 +40,13 @@ public abstract class Role {
 
 	public void setDefense(int defense) {
 		this.defense = defense;
+	}
+
+	public int getGold() {
+		return gold;
+	}
+
+	public void setGold(int gold) {
+		this.gold = gold;
 	}
 }

@@ -5,14 +5,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import TextGame.Enemy;
+import character.Monster;
 
-class EnemyTest {
+class MonsterTest {
 
 	@Test
 	void testEnemyAttributes() {
-		Enemy enemy = new Enemy("Jiaqi", 10, 10, 10);
-		Enemy enemy2 = new Enemy("Fake");
+		Monster enemy = new Monster("Jiaqi", 10, 10, 10);
+		Monster enemy2 = new Monster("Fake");
 		enemy2.setHitPoint(20);
 		enemy2.setAttack(20);
 		enemy2.setDefense(20);
@@ -27,5 +27,4 @@ class EnemyTest {
 		assertTrue("The defense of enemy is wrong", enemy2.getDefense() == 20);
 	}
 
-	
 }

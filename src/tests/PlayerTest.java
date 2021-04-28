@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import TextGame.Enemy;
-import TextGame.Player;
+import character.Monster;
+import character.Player;
 
 class PlayerTest {
 
@@ -32,10 +32,9 @@ class PlayerTest {
 		p.setAttack(20);
 		p.setDefense(10);
 		
-		Enemy enemy = new Enemy("Jiaqi", 100, 20, 5);
+		Monster enemy = new Monster("Jiaqi", 100, 20, 5);
 		p.battel(enemy);
 		assertTrue("The hp of player is wrong", p.getHitPoint() == 40);
 		assertTrue("The hp of enemy is wrong", enemy.getHitPoint() == 85);
 	}
-
 }
